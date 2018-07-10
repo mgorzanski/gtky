@@ -1,25 +1,28 @@
-import express from 'express';
-import path from 'path';
+// import express from 'express';
+// import path from 'path';
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
+import ReactDOM from 'react-dom';
+// import ReactDOMServer from 'react-dom/server';
 
-import Html from './common/components/Html';
+// import Html from './common/components/Html';
 import App from './common/components/App';
 
-const app = express();
+// const app = express();
 
-app.use(express.static(path.join(__dirname)));
+// app.use(express.static(path.join(__dirname)));
 
-app.get('/', async (req, res, next) => {
-    const appMarkup = ReactDOMServer.renderToString(
-        <App />
-    );
+// app.get('/', async (req, res, next) => {
+//     const appMarkup = ReactDOMServer.renderToString(
+//         <App />
+//     );
 
-    const html = ReactDOMServer.renderToStaticMarkup(
-        <Html title="Get To Know Yourself" children={appMarkup} />
-    );
+//     const html = ReactDOMServer.renderToStaticMarkup(
+//         <Html title="Get To Know Yourself" children={appMarkup} />
+//     );
 
-    res.send(`<!DOCTYPE html>${html}`);
-});
+//     res.send(`<!DOCTYPE html>${html}`);
+// });
 
-app.listen(3000, () => console.log('Server is running on localhost:3000...'));
+// app.listen(3000, () => console.log('Server is running on localhost:3000...'));
+
+ReactDOM.render(<App />, document.getElementById('root'));
