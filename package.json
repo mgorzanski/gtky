@@ -20,10 +20,14 @@
   },
   "homepage": "https://github.com/mgorzanski/gtky#readme",
   "dependencies": {
+    "axios": "^0.18.0",
+    "bootstrap": "^4.1.1",
     "express": "^4.16.3",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "react-dom": "^16.4.1",
+    "reactstrap": "^6.3.0",
+    "styled-components": "^3.3.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

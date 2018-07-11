@@ -2,6 +2,7 @@
 // import path from 'path';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 // import ReactDOMServer from 'react-dom/server';
 
 // import Html from './common/components/Html';
