@@ -1,25 +1,20 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Container, Row, Col } from 'reactstrap';
-import Header from './../../styled-components/Header';
+import React from "react";
+import styled from "styled-components";
+import { Container, Row, Col } from "reactstrap";
+import Header from "./../../styled-components/Header";
 
 class App extends React.Component {
-    render() {
-        return (
-            <div id="App">
-                <Header>
-                </Header>
+  render() {
+    return (
+      <div id="App">
+        <Header />
 
-                <main>
+        <main />
 
-                </main>
-
-                <footer>
-
-                </footer>
-            </div>
-        );
-    }
+        <footer />
+      </div>
+    );
+  }
 }
 
 export default App;
