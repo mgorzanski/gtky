@@ -3,27 +3,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import ReactDOMServer from 'react-dom/server';
 
-// import Html from './common/components/Html';
 import App from './common/components/App';
 
+ReactDOM.render(<App />, document.getElementById('root'));
+// import React from 'react';
+// import { renderToString } from 'react-dom/server';
+// import App from './common/components/App';
+// import Html from './common/components/Html';
+// import express from 'express';
+// import fs from 'fs';
+
+// const index = fs.readFileSync(__dirname + '/public/index.html', 'utf8');
+
 // const app = express();
-
-// app.use(express.static(path.join(__dirname)));
-
-// app.get('/', async (req, res, next) => {
-//     const appMarkup = ReactDOMServer.renderToString(
-//         <App />
-//     );
-
-//     const html = ReactDOMServer.renderToStaticMarkup(
-//         <Html title="Get To Know Yourself" children={appMarkup} />
-//     );
-
-//     res.send(`<!DOCTYPE html>${html}`);
+// app.get('**', (req, res) => {
+//   const html = renderToString(<App />);
+//   const finalHtml = index.replace('<!-- ::APP:: -->', html);
+//   res.send(finalHtml);
 // });
 
-// app.listen(3000, () => console.log('Server is running on localhost:3000...'));
+// export default (req, res) => {
+//   const html = renderToString(<App />);
+//   const template = Html(html);
+//   res.send(template);
+// };
 
-ReactDOM.render(<App />, document.getElementById('root'));

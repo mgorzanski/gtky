@@ -10,7 +10,7 @@ class App extends React.Component {
         <Header />
 
         <main />
-
+        <p>Test</p>
         <footer />
       </div>
     );

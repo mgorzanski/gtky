@@ -4,8 +4,10 @@
   "description": "Simple application to help you get to know yourself better.",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
-    "build": "webpack --mode production",
+    "dev:build": "webpack --mode=development --config webpack.dev.babel.js -w",
+    "dev:start": "nodemon ./build/app.js",
+    "dev": "npm-run-all --parallel dev:build dev:start",
+    "build": "cross-env NODE_ENV=production webpack --mode=production --config webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,24 +23,37 @@
   "homepage": "https://github.com/mgorzanski/gtky#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-stage-2": "^6.24.1",
     "bootstrap": "^4.1.1",
     "express": "^4.16.3",
+    "fs": "0.0.1-security",
+    "memory-fs": "^0.4.1",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "reactstrap": "^6.3.0",
-    "styled-components": "^3.3.3"
+    "require-from-string": "^2.0.2",
+    "styled-components": "^3.3.3",
+    "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
+    "autoprefixer": "^8.6.5",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "cross-env": "^5.2.0",
+    "css-loader": "^1.0.0",
+    "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
+    "nodemon": "^1.18.1",
+    "npm-run-all": "^4.1.3",
+    "postcss-loader": "^2.1.6",
     "prettier": "1.13.7",
+    "style-loader": "^0.21.0",
     "webpack": "^4.15.1",
     "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^3.1.4",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-dev-server": "^3.1.4"
   }
 }
