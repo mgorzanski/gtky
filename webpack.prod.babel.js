@@ -1,10 +1,16 @@
 const path = require("path");
 const nodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const UlgifyJSPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const cssPlugin = new MiniCssExtractPlugin({
   filename: "main.css"
+});
+
+const uglify = new UlgifyJSPlugin({
+  sourceMap: true
 });
 
 const clientConfig = {
@@ -15,11 +21,17 @@ const clientConfig = {
     filename: "bundle.js",
     path: path.resolve(__dirname, "build"),
   },
-  devtool: "inline-source-map",
+  devtool: "source-map",
   node: {
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
+  },
+  optimization: {
+    minimizer: [
+      uglify,
+      new OptimizeCSSAssetsPlugin({})
+    ]
   },
   plugins: [cssPlugin, new CleanWebpackPlugin(['build']),],
   module: {
@@ -72,6 +84,12 @@ const serverConfig = {
     Buffer: false,
     __filename: false,
     __dirname: false,
+  },
+  optimization: {
+    minimizer: [
+      uglify,
+      new OptimizeCSSAssetsPlugin({})
+    ]
   },
   module: {
     rules: [
