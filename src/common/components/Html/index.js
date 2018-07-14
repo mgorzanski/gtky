@@ -4,23 +4,35 @@ import PropTypes from "prop-types";
 class Html extends React.Component {
   static propTypes = {
     title: PropTypes.string,
+    styles: PropTypes.array,
     body: PropTypes.node.isRequired,
-    scripts: PropTypes.array
+    initialState: PropTypes.object,
+    scripts: PropTypes.array,
   };
 
   render() {
-    const { title, body, scripts } = this.props;
+    const { title, styles, body, initialState, scripts } = this.props;
 
     return (
       <html>
         <head>
           <meta charSet="utf-8" />
           <title>{title}</title>
+          {styles.map((item, index) => {
+          return <link rel="stylesheet" key={index} href={item} />;
+        })}
         </head>
 
         <body>
           <div id="root" dangerouslySetInnerHTML={{ __html: body }}></div>
         </body>
+        {initialState && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.APP_STATE=${JSON.stringify(initialState)}`
+            }}
+          ></script>
+        )}
         {scripts.map((item, index) => {
           return <script key={index} src={item}></script>;
         })}
@@ -30,17 +42,3 @@ class Html extends React.Component {
 }
 
 export default Html;
-// export default (html) => `
-//     <!DOCTYPE html>
-//     <html>
-//     <head>
-//         <title>test app</title>
-//         <meta charset="utf-8">
-//         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-//     </head>
-//     <body>
-//         <div id="app">${html}</div>
-//         <script src="/build/bundje.js"></script>
-//     </body>
-//     </html>
-// `;

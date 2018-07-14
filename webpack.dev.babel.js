@@ -1,52 +1,31 @@
 const path = require("path");
-// const HtmlWebPackPlugin = require("html-webpack-plugin");
 const nodeExternals = require('webpack-node-externals');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-// const htmlPlugin = new HtmlWebPackPlugin({
-//   template: "./public/index.html",
-//   filename: "./index.html"
-// });
+const cssPlugin = new MiniCssExtractPlugin({
+  filename: "main.css"
+});
 
-// module.exports = {
-//   target: 'node',
-//   externals: [nodeExternals()],
-//   entry: ["babel-polyfill", "./src/index.js"],
-//   output: {
-//     filename: "bundle.js",
-//     path: path.resolve(__dirname, "build"),
-//     library: 'app',
-//     libraryTarget: 'commonjs2'
-//   },
-//   module: {
-//     rules: [
-//       {
-//         test: /\.(js|jsx)$/,
-//         exclude: /node_modules/,
-//         use: {
-//           loader: "babel-loader"
-//         }
-//       },
-//       {
-//         test: /\.css$/,
-//         use: [
-//           { loader: "style-loader/url" },
-//           { loader: "file-loader" },
-//           { loader: "css-loader", options: { sourceMap: true } },
-//           { loader: "postcss-loader" }
-//         ]
-//       }
-//     ]
-//   },
-//   // plugins: [htmlPlugin],
-//   devtool: "inline-source-map"
-// };
-
-const common = {
+const clientConfig = {
+  name: 'client',
+  target: 'web',
+  entry: { client: ["babel-polyfill", path.resolve(__dirname, 'src', 'index.js')] },
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "build"),
+  },
+  devtool: "inline-source-map",
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+  },
+  plugins: [cssPlugin],
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
+        include: [path.resolve(__dirname, 'src')],
         use: {
           loader: "babel-loader"
         }
@@ -54,8 +33,7 @@ const common = {
       {
         test: /\.css$/,
         use: [
-          { loader: "style-loader/url" },
-          { loader: "file-loader" },
+          { loader: MiniCssExtractPlugin.loader },
           { loader: "css-loader", options: { sourceMap: true } },
           { loader: "postcss-loader" }
         ]
@@ -64,29 +42,35 @@ const common = {
   }
 };
 
-const clientConfig = {
-  ...common,
-  name: 'client',
-  target: 'web',
-  entry: { client: ["babel-polyfill", path.resolve(__dirname, 'src', 'index.js')] },
-  output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "build"),
-  },
-  devtool: "inline-source-map"
-};
-
 const serverConfig = {
-  ...common,
   name: 'server',
   target: 'node',
-  externals: [nodeExternals()],
+  externals: [nodeExternals({ whitelist: [/\.(?!(?:jsx?|json)$).{1,5}$/i] })],
   entry: { server: ['babel-polyfill', path.resolve(__dirname, 'src', 'server.js')] },
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'app.js'
   },
-  devtool: 'inline-source-map'
+  devtool: 'inline-source-map',
+  node: {
+    console: false,
+    global: false,
+    process: false,
+    Buffer: false,
+    __filename: false,
+    __dirname: false,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        include: [path.resolve(__dirname, 'src')],
+        use: {
+          loader: "babel-loader"
+        }
+      }
+    ]
+  }
 };
 
 export default [clientConfig, serverConfig];
