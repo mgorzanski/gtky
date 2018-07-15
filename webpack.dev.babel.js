@@ -1,7 +1,6 @@
 const path = require("path");
 const nodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const cssPlugin = new MiniCssExtractPlugin({
   filename: "main.css"
@@ -21,7 +20,7 @@ const clientConfig = {
     net: 'empty',
     tls: 'empty',
   },
-  plugins: [cssPlugin, new CleanWebpackPlugin(['build']),],
+  plugins: [cssPlugin],
   module: {
     rules: [
       {

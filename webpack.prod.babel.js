@@ -33,7 +33,7 @@ const clientConfig = {
       new OptimizeCSSAssetsPlugin({})
     ]
   },
-  plugins: [cssPlugin, new CleanWebpackPlugin(['build']),],
+  plugins: [cssPlugin, new CleanWebpackPlugin(['build'])],
   module: {
     rules: [
       {

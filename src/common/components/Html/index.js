@@ -5,22 +5,25 @@ class Html extends React.Component {
   static propTypes = {
     title: PropTypes.string,
     styles: PropTypes.array,
+    styleTags: PropTypes.array,
     body: PropTypes.node.isRequired,
     initialState: PropTypes.object,
     scripts: PropTypes.array,
   };
 
   render() {
-    const { title, styles, body, initialState, scripts } = this.props;
+    const { title, styles, styleTags, body, initialState, scripts } = this.props;
 
     return (
       <html>
         <head>
           <meta charSet="utf-8" />
           <title>{title}</title>
+          <meta name="viewport" content="width=device-width; initial-scale=1.0" />
           {styles.map((item, index) => {
-          return <link rel="stylesheet" key={index} href={item} />;
-        })}
+            return <link rel="stylesheet" key={index} href={item} />;
+          })}
+          {styleTags}
         </head>
 
         <body>
