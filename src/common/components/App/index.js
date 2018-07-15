@@ -9,10 +9,20 @@ class App extends React.Component {
     return (
       <div id="App">
         <Container fluid>
-          <Header />
-          <main id="main" role="main">
-            <Sidebar />
-          </main>
+          <Row>
+            <Header />
+          </Row>
+          <Row>
+            <main id="main" role="main">
+              
+                <Row>
+                  <Col>
+                    <Sidebar />
+                  </Col>
+                </Row>
+              
+            </main>
+          </Row>
         </Container>
       </div>
     );
